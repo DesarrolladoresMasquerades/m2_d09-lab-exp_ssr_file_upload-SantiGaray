@@ -53,6 +53,10 @@ module.exports = (app) => {
       secret: process.env.SESSION_SECRET || "super hyper secret key",
       resave: false,
       saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        maxAge: 600000 // 600 * 1000 ms === 10 min
+      }, // ADDED code below !!!
       store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/lab-express-irontumblr",
       }),
