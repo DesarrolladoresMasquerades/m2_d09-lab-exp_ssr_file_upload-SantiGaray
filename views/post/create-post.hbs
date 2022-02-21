@@ -1,18 +1,14 @@
-<form action="/post" method="POST" enctype="multipart/form-data">
 
-  <label for="content">Post your text here</label>
-  <textarea name="content" id="content" cols="30" rows="10" placeholder="enter content"></textarea>
+  <form action="/post/create-post" method="POST">
 
+    <label for="content">Your text here</label>
+    <textarea name="content" id="content" cols="30" rows="10" placeholder="enter content"></textarea>
 
-  <label>Name your image here
-    <input type="text"  name="imgName">
-  </label>
-  
-  <label>Post image</label>
-  <input type="file"  name="imgUrl">
+    <label for="picPath">Pic link</label>
+    <input type="text" name="picPath" id="picPath">
 
+    <label for="picName">Pic name</label>
+    <input type="text" name="picName" id="picName">
 
-  <button type="submit">Post It!</button>
-  
-</form>
-
+    <button type="submit">Post It!</button> 
+  </form>

@@ -124,7 +124,7 @@ router.get("/user-profile", isLoggedIn, (req, res) => {
 ///////////////////////////// EDIT PROFILE//////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-router.route('/edit', isLoggedIn)
+router.route('/edit')
   .get((req, res) => {
     res.render("users/profile-edit")
   })
