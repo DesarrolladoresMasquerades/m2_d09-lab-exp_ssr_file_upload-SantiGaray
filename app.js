@@ -25,7 +25,7 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
 
 // bind user to view - locals
 app.use('/', (req, res, next) => {
-  res.locals.user = req.session.user
+  res.locals.user = req.session.currentUser
   next()
 })
 
@@ -34,7 +34,13 @@ const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require('./routes/auth.routes');
-app.use('/', authRoutes);
+app.use('/', authRoutes); 
+
+const postRoutes = require('./routes/post.routes');
+app.use('/post', postRoutes);
+
+//const postRoutes = require('./routes/post.routes')
+//app.use('/post', postRoutes)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);

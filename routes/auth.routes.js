@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
+const fileUploader= require("../config/cloudinary.config")
+
 
 // ℹ️ Handles password encryption
 const bcryptjs = require("bcryptjs");
@@ -95,7 +97,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         res.render("auth/login", { errorMessage: "Email is not registered. Try with other email." });
         return;
       } else if (bcryptjs.compareSync(password, user.passwordHash)) {
-        req.session.user = user;
+        req.session.currentUser = user;
         res.redirect("/user-profile");
       } else {
         res.render("auth/login", { errorMessage: "Incorrect password." });
@@ -116,5 +118,25 @@ router.post("/logout", isLoggedIn, (req, res) => {
 router.get("/user-profile", isLoggedIn, (req, res) => {
   res.render("users/user-profile");
 });
+
+
+//////////////////////////////  ITERATION 1  ///////////////////////////////
+///////////////////////////// EDIT PROFILE//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+router.route('/edit')
+  .get((req, res) => {
+    res.render("users/profile-edit")
+  })
+  .post(fileUploader.single("imgUrl"), (req, res) => {
+    const id = req.session.currentUser._id
+    const imgUrl = req.file.path
+    User.findByIdAndUpdate(id, {imgUrl}, {new: true})
+    .then((user) => {
+      res.render("users/user-profile", {user:user})
+    })
+  })
+
+  
 
 module.exports = router;

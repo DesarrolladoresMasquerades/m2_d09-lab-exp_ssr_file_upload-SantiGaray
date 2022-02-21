@@ -1,2 +1,9 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>Lastest Posts!!</h1>
+
+<div>
+    {{#each posts}}
+        <a href="post/{{_id}}"><img class="img" src="{{picPath}}"></img></a>
+    {{/each}}
+</div>
+
+
